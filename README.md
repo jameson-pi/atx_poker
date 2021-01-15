@@ -1,2 +1,2 @@
 # atx_poker
-poker in austin, texas
+poker database for austin, texas
