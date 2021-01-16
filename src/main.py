@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-from repositories.fixed import TableData
+from repositories.query import TableData
 
 app = Flask(__name__)
 @app.route('/')
