@@ -1,12 +1,25 @@
 <!DOCTYPE html>
 <html>
   <head>
-
+    <title>Austin Poker</title>
   </head>
   <body>
-    <h1>{% block title %}poker{% endblock %}</h1>
-    {% if y %}
-      {{ y }}
-    {% endif %}
+    <h1>Current Tables</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>location</th>
+          <th>table</th>
+          <th>count</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for tables in table_data %}
+        <tr>
+          <td>{{tables.location}}
+          <td>{{tables.table}}
+          <td>{{tables.count}}
+        </tr>
+        {% endfor %}
   </body>
 </html>
