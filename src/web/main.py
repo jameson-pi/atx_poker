@@ -1,5 +1,4 @@
 from flask import Flask, render_template
-from extract import x
 from repositories.fixed import TableData
 
 app = Flask(__name__)

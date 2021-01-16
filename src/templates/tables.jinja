@@ -5,8 +5,20 @@
   </head>
   <body>
     <h1>{% block title %}poker{% endblock %}</h1>
-    {% if y %}
-      {{ y }}
-    {% endif %}
+    <table>
+      <thead>
+        <tr>
+          <th>location
+          <th>table
+          <th>count
+        </tr>
+      </thead>
+      <tbody>
+        {% for tables in table_data %}
+        <tr>
+          <td>tables.location
+          <td>tables.table
+          <td>tables.count
+        </tr>
   </body>
 </html>
