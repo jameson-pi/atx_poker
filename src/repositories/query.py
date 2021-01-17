@@ -23,7 +23,7 @@ class TableData():
         results = Tempus.get_active_tables(21)
 
         for result in results:
-            yield {location: "Georgetown Poker Club", table: result[name], players: result["players"]}
+            yield {"location": "Georgetown Poker Club", "table": result["name"],"players": result["players"]}
 
     def palms_source():
 
@@ -31,7 +31,7 @@ class TableData():
         results = Tempus.get_active_tables(25)
 
         for result in results:
-            yield {location: "Palms Social", table: result[name], players: result["players"]}
+            yield {"location": "Palms Social", "table": result["name"],"count":result["players"]}
 
 
 class Tempus():
