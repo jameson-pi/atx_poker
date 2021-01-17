@@ -14,26 +14,30 @@
       <h1>Austin Poker</h1>
       <p>Poker in Austin all in 1 project.</p> 
     </div>
-    <div data-spy="scroll">
-      <h1>Current Tables</h1>
-      <table border=1>
-        <thead>
-          <tr>
-            <th>location</th>
-            <th>table</th>
-            <th>count</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for tables in table_data %}
-          <tr>
-            <td>{{tables.location}}
-            <td>{{tables.table}}
-            <td>{{tables.count}}
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+    <div data-spy="scroll" class="container-fluid" >
+      <div class="row">
+        <div class="col-9">
+          <h1>Current Tables</h1>
+          <table border=1>
+            <thead>
+              <tr>
+                <th>location</th>
+                <th>table</th>
+                <th>count</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for tables in table_data %}
+              <tr>
+                <td>{{tables.location}}
+                <td>{{tables.table}}
+                <td>{{tables.count}}
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </body>
 </html>
