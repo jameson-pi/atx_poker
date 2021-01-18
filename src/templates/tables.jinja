@@ -6,13 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-    $(document).ready(function(){
-      $("#hide_active").click(function(){
-        $("#active").hide();
-      });
-    });
-    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   </head>
@@ -23,10 +16,9 @@
       <p>Poker in Austin all in 1 project.</p> 
     </div>
     <p id="hide_active">hide active Tables</p>
-    <div data-spy="scroll" class="container-fluid" id="active">
-      
+    <div data-spy="scroll" class="container-fluid">
       <div class="row">
-        <div class="col-9">
+        <div class="col-9" id="active">
           <h1>Current Tables</h1>
           <table border=1>
             <thead>
@@ -37,11 +29,11 @@
               </tr>
             </thead>
             <tbody>
-              {% for tables in table_data %}
+              {% for games in table_data %}
               <tr>
-                <td>{{tables.location}}
-                <td>{{tables.table}}
-                <td>{{tables.count}}
+                <td>{{games.location}}
+                <td>{{games.table}}
+                <td>{{games.count}}
               </tr>
               {% endfor %}
             </tbody>
