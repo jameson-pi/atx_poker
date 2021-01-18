@@ -13,12 +13,24 @@ class TableData():
     
     def get_current_tables():
         
-        sources = [TableData.georgetown_source, TableData.palms_source, TableData.the_lodge_source, TableData.shuffle_source]
+        sources = [TableData.georgetown_source, TableData.palms_source, TableData.the_lodge_source, TableData.shuffle_source, TableData.tch_source]
         tables = []
         for source in sources:
             tables += source()
 
         return tables
+
+    def tch_source():
+        page = requests.get("https://texascardhouse.com/north-austin/")
+        tree = html.fromstring(page.content)
+        
+        tables = tree.xpath("//table[contains(concat(' ',normalize-space(@class),' '),' game-table ')]/tbody/tr")
+
+        for table in tables:
+            values = table.xpath("td/text()")
+            if len(values) >= 3:
+                if int(values[1]) > 0:
+                    yield {"location": "Texas Cardhouse", "table": values[0],"count": values[1]}
 
     def shuffle_source():
         page = requests.get("https://www.pokeratlas.com/poker-room/shuffle-512-austin")
