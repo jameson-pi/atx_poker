@@ -1,0 +1,13 @@
+$(document).ready(function(){
+  $("#show_active").hide();
+  $("#hide_active").click(function(){
+    $("#active").hide();
+    $(self).hide()
+    $("#show_active").show();
+  });
+  $("#show_active").click(function(){
+    $(self).hide();
+    $("#hide_active").show();
+    $("#active").show();
+  });
+});
