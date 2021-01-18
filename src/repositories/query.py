@@ -1,4 +1,8 @@
 import pyrebase
+import requests
+import json
+from lxml import html
+
 
 def noquote(s):
     return s
@@ -9,30 +13,46 @@ class TableData():
     
     def get_current_tables():
         
-        sources = [TableData.georgetown_source, TableData.palms_source]
+        sources = [TableData.georgetown_source, TableData.palms_source, TableData.the_lodge_source, TableData.shuffle_source]
         tables = []
         for source in sources:
             tables += source()
 
         return tables
 
+    def shuffle_source():
+        page = requests.get("https://www.pokeratlas.com/poker-room/shuffle-512-austin")
+        tree = html.fromstring(page.content)
+        
+        tables = tree.xpath("//section[contains(concat(' ',normalize-space(@class),' '),' live-cash-game-panel ')]/table[@class='live-info']/tr")
+
+        for table in tables:
+            values = table.xpath("td/text()")
+            if len(values) >= 4:
+                if int(values[1]) > 0:
+                    yield {"location": "Shuffle 512", "table": values[0],"count": values[1]}
+
+    def pokeratlas_source(id, name):
+        tables = []
+        results = requests.get("https://www.pokeratlas.com/api/live_cash_games?key=" + id).json()
+        for result in results:
+            if result["tables"] > 0:
+                yield {"location": name, "table": result["game_name"], "count": result["tables"]}
+
+    def the_lodge_source():
+        return TableData.pokeratlas_source("6cc94941-760f-496f-a24c-4b9743d928cb", "The Lodge")
+
+    def tempus_source(name, id):
+        results = Tempus.get_active_tables(id)
+
+        for result in results.values():
+            yield {"location": name, "table": result["name"], "count": 1}
 
     def georgetown_source():
-
-
-        results = Tempus.get_active_tables(21)
-
-        for result in results:
-            yield {"location": "Georgetown Poker Club", "table": result["name"],"players": result["players"]}
+        return TableData.tempus_source("Georgetown Poker Club", 21)
 
     def palms_source():
-
-
-        results = Tempus.get_active_tables(25)
-
-        for result in results:
-            yield {"location": "Palms Social", "table": result["name"],"count":result["players"]}
-
+        return TableData.tempus_source("Palms Social", 25)
 
 class Tempus():
     def get_active_tables(id):
