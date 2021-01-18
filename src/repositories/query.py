@@ -17,22 +17,18 @@ class TableData():
         return tables
 
 
+    def tempus_source(name, id):
+        results = Tempus.get_active_tables(id)
+
+        for result in results.values():
+            yield {"location": name, "table": result["name"], "count": 1}
+
+
     def georgetown_source():
-
-
-        results = Tempus.get_active_tables(21)
-
-        for result in results:
-            yield {location: "Georgetown Poker Club", table: result[name], players: result["players"]}
+        return TableData.tempus_source("Georgetown Poker Club", 21)
 
     def palms_source():
-
-
-        results = Tempus.get_active_tables(25)
-
-        for result in results:
-            yield {location: "Palms Social", table: result[name], players: result["players"]}
-
+        return TableData.tempus_source("Palms Social", 25)
 
 class Tempus():
     def get_active_tables(id):
