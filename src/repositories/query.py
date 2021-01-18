@@ -48,7 +48,6 @@ class TableData():
         for result in results.values():
             yield {"location": name, "table": result["name"], "count": 1}
 
-
     def georgetown_source():
         return TableData.tempus_source("Georgetown Poker Club", 21)
 
