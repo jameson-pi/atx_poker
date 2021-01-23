@@ -5,5 +5,5 @@ app = Flask(__name__)
 
 @app.route('/')
 def main_content():
-  table_data = TableData.get_current_tables()
-  return render_template("tables.jinja", table_data = table_data)
+  table_data, table_count = TableData.get_current_tables()
+  return render_template("tables.jinja", table_data = table_data, table_count=table_count)
