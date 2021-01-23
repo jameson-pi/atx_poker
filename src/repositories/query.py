@@ -151,7 +151,7 @@ class Tempus():
 
         if waitlist.each() != None and table_players != {}:
             for waitlist_player in waitlist.each():
-                if waitlist_player.val()["table"] in table_players["table"]:
+                if waitlist_player.val()["table"] in table_players:
                     table_players[table]["waitlist"] = table_players[table]["waitlist"] + 1
 
         return table_players
