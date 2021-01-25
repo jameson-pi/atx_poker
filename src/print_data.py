@@ -3,7 +3,7 @@ games = []
 for game in TableData.get_current_tables():
   if '\n' in game['table']:
     game_split = game['table'].split('\n')
-    print('game = ',end = " ")
+    print('game = ',end = "")
     for games in game_split:
       print(games)
     print(f'at',game['location'])
