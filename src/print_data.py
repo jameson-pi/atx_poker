@@ -9,3 +9,4 @@ for game in TableData.get_current_tables():
     print(f'at',game['location'])
   else:
     print(f'game =',game['table'],'at',game['location'])
+  print()
