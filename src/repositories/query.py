@@ -3,9 +3,7 @@ try:
   import requests
   import pyrebase
   import json
-  from lxml import html
-except:
-  error = 424
+  from lxml import htm
 
 
 def noquote(s):
