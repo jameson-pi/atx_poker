@@ -12,7 +12,7 @@ def page_not_found(e):
 def main_content():
   if error is not None:
     return render_template('error.html',error = error)
-  elif table_data is not None:
+  elif table_data is None:
     return render_template("error.html", error = 204)
   else:
     return render_template("tables.html", table_data = table_data)
