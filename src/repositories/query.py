@@ -1,7 +1,11 @@
-import pyrebase
-import requests
-import json
-from lxml import html
+error = None
+try:
+  import requests
+  import pyrebase
+  import json
+  from lxml import html
+except:
+  error = 424
 
 
 def noquote(s):
@@ -16,8 +20,10 @@ class TableData():
         sources = [TableData.georgetown_source, TableData.palms_source, TableData.the_lodge_source, TableData.shuffle_source]
         tables = []
         for source in sources:
-            tables += source()
-
+            try:
+                tables += source()
+            except:
+                pass
         return tables
 
     def shuffle_source():
