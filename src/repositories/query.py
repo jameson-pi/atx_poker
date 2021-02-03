@@ -12,7 +12,7 @@ pyrebase.pyrebase.quote = noquote
 
 class TableData():
     
-    expr = re.compile(r"\$(?P<small>\d+)[-\/]\${0,1}(?P<big>\d+)(?:[\/\(](?P<open>\d+)\)?){0,1}")
+    expr = re.compile(r"\$+(?P<small>\d+)[-\/]\${0,1}(?P<big>\d+)(?:[\/\(](?P<open>\d+)\)?){0,1}")
 
     @staticmethod
     def get_current_tables():
