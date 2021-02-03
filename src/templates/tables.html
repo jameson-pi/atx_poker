@@ -12,26 +12,30 @@
   <body>
     <div class="jumbotron text-center" style="margin-bottom:0">
       <h1>Austin Poker</h1>
-      <p>Poker in Austin all in 1 project.</p> 
+      <p>Austin Poker Room Aggregated Data</p> 
     </div>
     <div data-spy="scroll" class="container-fluid" >
       <div class="row">
-        <div class="col-9">
-          <h1>Current Tables</h1>
-          <table border=1>
+        <div class="col-12">
+          <h1>Current Tables - {{table_count}}</h1>
+          <table class="table table-striped table-bordered">
             <thead>
               <tr>
-                <th>location</th>
-                <th>table</th>
-                <th>count</th>
+                <th>Location</th>
+                <th>Game</th>
+                <th>Stakes</th>
+                <th>Count</th>
+                <th>Waitlist</th>
               </tr>
             </thead>
             <tbody>
               {% for tables in table_data %}
               <tr>
                 <td>{{tables.location}}
-                <td>{{tables.table}}
+                <td>{{tables.game}}
+                <td>{{tables.stakes}}
                 <td>{{tables.count}}
+                <td>{{tables.waitlist}}
               </tr>
               {% endfor %}
             </tbody>

@@ -1,9 +1,7 @@
-error = None
-try:
-  import requests
-  import pyrebase
-  import json
-  from lxml import htm
+import pyrebase
+import requests
+import json
+from lxml import html
 
 
 def noquote(s):
@@ -16,13 +14,16 @@ class TableData():
     def get_current_tables():
         
         sources = [TableData.georgetown_source, TableData.palms_source, TableData.the_lodge_source, TableData.shuffle_source]
+        total_tables = 0
         tables = []
         for source in sources:
             try:
                 tables += source()
             except:
                 pass
-        return tables
+        for table in tables:
+            total_tables = total_tables + table["count"]
+        return tables, total_tables
 
     def shuffle_source():
         page = requests.get("https://www.pokeratlas.com/poker-room/shuffle-512-austin")
@@ -34,14 +35,14 @@ class TableData():
             values = table.xpath("td/text()")
             if len(values) >= 4:
                 if int(values[1]) > 0:
-                    yield {"location": "Shuffle 512", "table": values[0],"count": values[1]}
+                    yield {"location": "Shuffle 512", "table": values[0],"count": int(values[1])}
 
     def pokeratlas_source(id, name):
         tables = []
         results = requests.get("https://www.pokeratlas.com/api/live_cash_games?key=" + id).json()
         for result in results:
             if result["tables"] > 0:
-                yield {"location": name, "table": result["game_name"], "count": result["tables"]}
+                yield {"location": name, "table": result["game_name"], "count": int(result["tables"])}
 
     def the_lodge_source():
         return TableData.pokeratlas_source("6cc94941-760f-496f-a24c-4b9743d928cb", "The Lodge")
