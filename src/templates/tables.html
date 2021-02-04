@@ -10,7 +10,23 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   </head>
   <body>
+    <script>
+      $(document).ready(function(){
+        $("#show_active").hide();
+        $("#hide_active").click(function(){
+          $("#active").hide();
+          $(self).hide()
+          $("#show_active").show();
+        });
+        $("#show_active").click(function(){
+          $(self).hide();
+          $("#hide_active").show();
+          $("#active").show();
+        });
+      });
+    </script>
     <noscript>please enable javascript in your browser</noscript>
+    <
     <div class="jumbotron text-center" style="margin-bottom:0">
       <h1>Austin Poker</h1>
       <p>Poker in Austin all in 1 project.</p> 
