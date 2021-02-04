@@ -1,8 +1,6 @@
 from flask import Flask, render_template
 from repositories.query import TableData
-
 app = Flask(__name__)
-
 @app.errorhandler(500)
 def server_error(e):
     return render_template('error.html',error = 500)
