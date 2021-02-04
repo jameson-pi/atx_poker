@@ -6,6 +6,10 @@
     </head>
     <body>
       <img src='https://http.cat/{{error}}.jpg'>
-      <a href="/">main page</a>
+      {% if error == 404 %}
+      <a href="/">
+      <img src='home.png' alt='home'>
+      </a>
+      {% endif }
     </body>
 </html>
