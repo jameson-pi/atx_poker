@@ -16,9 +16,8 @@ def page_not_found(e):
 
 @app.route('/')
 def main_content():
-  table_data, table_count = TableData.get_current_tables()
-
-  if table_data is None:
-    return render_template("error.html", error = 204)
-  else:
-    return render_template("tables.html", table_data = table_data, table_count=table_count)
+    table_data, table_count = TableData.get_current_tables()
+    if table_data is None:
+        return render_template("error.html", error = 204)
+    else:
+        return render_template("tables.html", table_data = table_data, table_count=table_count)

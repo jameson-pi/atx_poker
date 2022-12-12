@@ -11,7 +11,7 @@ pyrebase.pyrebase.quote = noquote
 
 class TableData():
     
-    def get_current_tables():
+    def get_current_tables(self):
         
         sources = [TableData.georgetown_source, TableData.palms_source, TableData.the_lodge_source, TableData.shuffle_source]
         total_tables = 0
