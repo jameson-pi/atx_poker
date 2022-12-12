@@ -1,14 +1,7 @@
 from repositories.query import TableData
 games = []
-games = TableData.get_current_tables()
+games = TableData.get_current_tables()[0]
 if games is not None:
+  print(games,"\n\n")
   for game in games:
-    if '\n' in game['table']:
-      game_split = game['table'].split('\n')
-      print('game = ',end = "")
-      for games in game_split:
-        print(games)
-      print(f'at',game['location'])
-    else:
-      print(f'game =',game['table'],'at',game['location'])
-    print()
+    print('game =',game["table"],'at',game["location"])

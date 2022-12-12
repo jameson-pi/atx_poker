@@ -1,5 +1,8 @@
-from flask import Flask, render_template
-from repositories.query import TableData
+try:
+    from flask import Flask, render_template
+    from repositories.query import TableData
+except:
+    render_template("error.html", error = 424)
 
 app = Flask(__name__)
 

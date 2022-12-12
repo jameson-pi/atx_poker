@@ -1,5 +1,11 @@
 # atx_poker
-poker database for austin, texas
+poker database for austin, texas.
 ## how to use
-run `python -m pip install -r requirements.txt`
-than go to the main.py file and run it
+run `sh main.sh`.
+### flags:
+use `-p` to print instead of a web server.
+
+use `-i` to just install.
+
+use `-n` if you have already installed.
+
