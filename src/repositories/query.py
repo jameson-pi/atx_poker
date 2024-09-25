@@ -1,13 +1,8 @@
-import pyrebase
 import requests
 import json
 from lxml import html
 
 
-def noquote(s):
-    return s
-
-pyrebase.pyrebase.quote = noquote
 
 class TableData():
     
@@ -47,17 +42,34 @@ class TableData():
     def the_lodge_source():
         return TableData.pokeratlas_source("6cc94941-760f-496f-a24c-4b9743d928cb", "The Lodge")
 
-    def tempus_source(name, id):
-        results = Tempus.get_active_tables(id)
-
-        for result in results.values():
-            yield {"location": name, "table": result["name"], "count": 1}
+    def tempus_source(location_id):
+        url = f"https://tempus-c6c9c.firebaseio.com/{location_id}/customers.json?orderBy='visited'&equalTo=true"  # Adjust URL based on actual API endpoint
+        response = requests.get(url)
+        if response.status_code == 200:
+            data = response.json()
+            table_players = {}
+            for player_id, player_data in data.items():
+                table = player_data.get("table")
+                if table:
+                    if table not in table_players:
+                        # Fetch table details from a separate endpoint (if needed)
+                        table_detail_url = f"https://tempus-c6c9c.firebaseio.com/{location_id}/tables/{table}.json"
+                        table_detail_response = requests.get(table_detail_url)
+                        if table_detail_response.status_code == 200:
+                            table_detail_data = table_detail_response.json()
+                            table_players[table] = {"name": table_detail_data.get("description", ""), "players": 0}
+                        else:
+                            table_players[table] = {"name": "Unknown", "players": 0}
+                        table_players[table]["players"] += 1
+            return table_players
+        else:
+            return {}
 
     def georgetown_source():
-        return TableData.tempus_source("Georgetown Poker Club", 21)
+        return TableData.tempus_source(21)
 
     def palms_source():
-        return TableData.tempus_source("Palms Social", 25)
+        return TableData.tempus_source(25)
 
 class Tempus():
     def get_active_tables(id):

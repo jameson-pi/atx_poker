@@ -1,11 +1,8 @@
-try:
-    from flask import Flask, render_template
-    from repositories.query import TableData
-except:
-    render_template("error.html", error = 424)
+from flask import Flask, render_template
+from repositories.query import TableData
 
 app = Flask(__name__)
-
+tables = TableData()
 @app.errorhandler(500)
 def server_error(e):
     return render_template('error.html',error = 500)
@@ -16,7 +13,7 @@ def page_not_found(e):
 
 @app.route('/')
 def main_content():
-    table_data, table_count = TableData.get_current_tables()
+    table_data, table_count = tables.get_current_tables()
     if table_data is None:
         return render_template("error.html", error = 204)
     else:

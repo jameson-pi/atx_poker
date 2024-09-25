@@ -6,7 +6,7 @@ else
     if [[ $1 = "-n" ]]; then
         true
     else
-        pip install -r requirements.txt
+        pip 
     fi
     cd src   
     if  [[ $1 = "-p" ]]; then
